@@ -127,17 +127,16 @@ const loginUser = async (req, res) => {
       });
     }
 
-    if (user?.isVerified === false) {
-      return res.status(401).send({
-        success: false,
-        type: "email",
-        message: "Email is not Verified",
-      });
-    }
+    // if (user?.isVerified === false) {
+    //   return res.status(401).send({
+    //     success: false,
+    //     type: "email",
+    //     message: "Email is not Verified",
+    //   });
+    // }
     if (
       user &&
-      bcrcypt.compareSync(req.body.password, user.password) &&
-      user?.isVerified === true
+      bcrcypt.compareSync(req.body.password, user.password)
     ) {
       const accessToken = await generateToken(user);
       return res.send({
