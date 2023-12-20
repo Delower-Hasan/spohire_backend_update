@@ -4,14 +4,19 @@ const jobSchema = new mongoose.Schema(
   {
     job_title: {
       type: String,
-      required: false,
+      required: true,
     },
-    job_position: {
+    club_logo: {
       type: String,
-      required: false,
+      required: true,
     },
-    offered_salary: {
-      type: Number,
+    company: {
+      type: String,
+      required: true,
+    },
+    workplaceType: {
+      type: String,
+      enum: ["On-site", "Hybrid", "Remote"],
       required: true,
     },
     job_location: {
@@ -23,17 +28,18 @@ const jobSchema = new mongoose.Schema(
       enum: ["Coach", "Player"],
       required: true,
     },
-    formation: {
+    jobType: {
       type: String,
-      required: false,
+      enum: ["Full-time", "Part-time", "Contract", "Temporary,"],
+      required: true,
     },
-    club_logo: {
-      type: String,
-      required: false,
+    salary: {
+      type: Number,
+      required: true,
     },
-    language: {
+    description: {
       type: String,
-      required: false,
+      required: true,
     },
   },
   {
