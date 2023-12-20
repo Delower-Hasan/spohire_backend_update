@@ -4,15 +4,15 @@ const jobSchema = new mongoose.Schema(
   {
     job_title: {
       type: String,
-      required: true,
+      required: false,
     },
     job_position: {
       type: String,
-      required: true,
+      required: false,
     },
     offered_salary: {
-      type: String,
-      required: false,
+      type: Number,
+      required: true,
     },
     job_location: {
       type: String,
@@ -25,15 +25,15 @@ const jobSchema = new mongoose.Schema(
     },
     formation: {
       type: String,
-      required: true,
+      required: false,
     },
     club_logo: {
       type: String,
-      required: true,
+      required: false,
     },
     language: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   {

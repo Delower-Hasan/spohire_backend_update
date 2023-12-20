@@ -32,10 +32,12 @@ const registerUser = async (req, res) => {
       });
 
       const user = await newUser.save();
+      const token = await generateToken(user);
       res.status(200).send({
         message: "We have created account successfully",
         status: 200,
-        user
+        user,
+        accessToken: token,
       });
     }
   } catch (err) {
@@ -134,10 +136,7 @@ const loginUser = async (req, res) => {
     //     message: "Email is not Verified",
     //   });
     // }
-    if (
-      user &&
-      bcrcypt.compareSync(req.body.password, user.password)
-    ) {
+    if (user && bcrcypt.compareSync(req.body.password, user.password)) {
       const accessToken = await generateToken(user);
       return res.send({
         success: true,
@@ -199,11 +198,7 @@ const deleteUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id, {
-      name: 1,
-      email: 1,
-      isVerified: 1,
-    });
+    const user = await User.findById(req.params.id);
     res.send(user);
   } catch (err) {
     res.status(500).send({
@@ -273,8 +268,12 @@ const forgetPassword = async (req, res) => {
 
 const changePassword = async (req, res) => {
   const { old_password, new_password } = req.body;
+  console.log(req.body, "good");
   try {
     const user = await User.findById({ _id: req.user._id });
+    console.log(req.user._id, "fjff");
+    console.log(req.user, "req fjff");
+    console.log(user, "userr");
 
     if (!user) {
       res.status(404).json({ message: "User not found." });
@@ -327,10 +326,9 @@ const checkIsExistEmail = async (req, res) => {
   }
 };
 
-
 const updateUserInfo = async (req, res) => {
   try {
-    const { password,  ...other } = req.body;
+    const { password, ...other } = req.body;
     const isExist = await User.findOne({ _id: req.params.id });
     if (isExist) {
       const result = await User.findByIdAndUpdate(
@@ -359,6 +357,52 @@ const updateUserInfo = async (req, res) => {
   }
 };
 
+const updateUserSubscriptionPlan = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { ...rest } = req.body;
+    const isExist = await User.findById(id);
+    if (isExist) {
+      const result = await User.findByIdAndUpdate(
+        { _id: req.params.id },
+        rest,
+        {
+          new: true,
+        }
+      );
+      res.status(200).json({
+        success: true,
+        message: "User Payment Update successfully",
+        data: result,
+      });
+    } else {
+      res.status(201).json({
+        success: false,
+        message: "Update unsuccessful",
+      });
+    }
+  } catch (error) {
+    res.status(201).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const getFilteredUsers = async (req, res) => {
+  try {
+    const { ...rest } = req.query;
+
+    const result = await User.find(rest);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(201).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
@@ -371,4 +415,6 @@ module.exports = {
   changePassword,
   checkIsExistEmail,
   updateUserInfo,
+  updateUserSubscriptionPlan,
+  getFilteredUsers,
 };
