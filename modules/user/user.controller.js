@@ -271,9 +271,9 @@ const changePassword = async (req, res) => {
   console.log(req.body, "good");
   try {
     const user = await User.findById({ _id: req.user._id });
-    console.log(req.user._id, "fjff");
-    console.log(req.user, "req fjff");
-    console.log(user, "userr");
+    // console.log(req.user._id, "fjff");
+    // console.log(req.user, "req fjff");
+    // console.log(user, "userr");
 
     if (!user) {
       res.status(404).json({ message: "User not found." });
