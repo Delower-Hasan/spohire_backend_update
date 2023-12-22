@@ -1,13 +1,31 @@
+const User = require("../../user/user.model");
 const Chat = require("./chat.model");
 
 const createChat = async (req, res) => {
   const { senderId, receiverId } = req.body;
-  const newChat = new Chat({
-    members: [senderId, receiverId],
-  });
+
   try {
+    const chat = await Chat.findOne({
+      members: { $all: [senderId, receiverId] },
+    });
+
+    if (chat) {
+      res.status(200).send({
+        message: "Conversation exists!",
+        conversationId: chat?._id,
+      });
+      return;
+    }
+
+    const newChat = new Chat({
+      members: [senderId, receiverId],
+    });
+
     const result = await newChat.save();
-    res.status(200).send(result);
+    res.status(200).send({
+      success: true,
+      data: result,
+    });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -18,7 +36,16 @@ const userChats = async (req, res) => {
     const result = await Chat.find({
       members: { $in: [req.params.userId] },
     });
-    res.status(200).send(result);
+
+    const userArray = result.map((i) =>
+      i?.members.find((j) => j !== req.params.userId)
+    );
+
+    const userDetailsArray = await User.find({ _id: { $in: userArray } });
+
+    // console.log(userDetailsArray, "dddd");
+
+    res.status(200).send(userDetailsArray);
   } catch (error) {
     res.status(500).send(error);
   }

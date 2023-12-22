@@ -12,7 +12,7 @@ const observationSchema = new mongoose.Schema({
   },
   target_type: {
     type: String,
-    enum: ["Announcement", "Job", "Player"],
+    enum: ["Announcement", "Job", "User"],
     required: true,
   },
 });

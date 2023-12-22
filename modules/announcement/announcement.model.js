@@ -24,7 +24,7 @@ const announcementSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["In_Progress", "Completed", "Denied"],
+      enum: ["In Progress", "Completed", "Denied"],
       required: true,
     },
   },
