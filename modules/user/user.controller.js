@@ -162,7 +162,7 @@ const loginUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({}).sort({ _id: -1 });
     res.status(200).send({
       data: users,
       status: 200,
@@ -393,7 +393,7 @@ const getFilteredUsers = async (req, res) => {
   try {
     const { ...rest } = req.query;
 
-    const result = await User.find(rest);
+    const result = await User.find(rest).sort({ _id: -1 });
     res.status(200).json(result);
   } catch (error) {
     res.status(201).json({
