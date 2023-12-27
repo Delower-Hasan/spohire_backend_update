@@ -14,19 +14,7 @@ const jobApplySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    weight: {
-      type: Number,
-      required: true,
-    },
-    height: {
-      type: Number,
-      required: true,
-    },
     region: {
-      type: String,
-      required: true,
-    },
-    language: {
       type: String,
       required: true,
     },
@@ -34,6 +22,19 @@ const jobApplySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
+    Phone: {
+      type: Number,
+      required: true,
+    },
+    cv: {
+      type: Buffer,
+      required: true,
+    },
+
     job: {
       type: mongoose.Schema.Types.ObjectId, // job id
       ref: "Job",
