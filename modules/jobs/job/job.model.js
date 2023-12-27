@@ -25,7 +25,7 @@ const jobSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["Coach", "Player"],
+      // enum: ["Coach", "Player"],
       required: true,
     },
     jobType: {
