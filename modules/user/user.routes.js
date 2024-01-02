@@ -12,6 +12,7 @@ const {
   updateUserInfo,
   updateUserSubscriptionPlan,
   getFilteredUsers,
+  updateUSerCreatedProfile,
 } = require("./user.controller");
 const { isAuth } = require("../../utils/middleware");
 
@@ -28,6 +29,7 @@ router.get("/:id", getUser);
 router.get("/user-info/me", isAuth, getUserInfo);
 router.post("/forgot-password", forgetPassword);
 router.post("/change-password", isAuth, changePassword);
+router.patch("/updateAddProfile/:id", isAuth, updateUSerCreatedProfile);
 
 // admin
 router.get("/", isAuth, getAllUsers); //admin

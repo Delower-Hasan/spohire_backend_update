@@ -389,6 +389,37 @@ const updateUserSubscriptionPlan = async (req, res) => {
   }
 };
 
+const updateUSerCreatedProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const isExist = await User.findById(id);
+    if (isExist) {
+      const result = await User.findByIdAndUpdate(
+        { _id: req.params.id },
+        { isCreatedProfile: true },
+        {
+          new: true,
+        }
+      );
+      res.status(200).json({
+        success: true,
+        message: "User Profile created successfully",
+        data: result,
+      });
+    } else {
+      res.status(201).json({
+        success: false,
+        message: "Update unsuccessful",
+      });
+    }
+  } catch (error) {
+    res.status(201).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 const getFilteredUsers = async (req, res) => {
   try {
     const { ...rest } = req.query;
@@ -417,4 +448,5 @@ module.exports = {
   updateUserInfo,
   updateUserSubscriptionPlan,
   getFilteredUsers,
+  updateUSerCreatedProfile,
 };

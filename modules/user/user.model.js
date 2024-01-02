@@ -132,6 +132,11 @@ const userSchema = new mongoose.Schema(
       enum: ["Gold", "Silver", "Bronze"],
       default: undefined,
     },
+    isCreatedProfile: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     // otp: {
     //   type: String,
     //   required: true,
