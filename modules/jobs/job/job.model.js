@@ -23,6 +23,10 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    country: {
+      type: String,
+      required: true,
+    },
     role: {
       type: String,
       // enum: ["Coach", "Player"],
