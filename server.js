@@ -45,7 +45,9 @@ app.use("/api/v1/chats", chatRoutes);
 app.use("/api/v1/messages", messageRoutes);
 
 // static file serving
-app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
+// app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
+
+//
 
 // -----------------socket server-----------------
 // const io = socketIo(Server, {

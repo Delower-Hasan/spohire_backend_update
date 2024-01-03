@@ -424,7 +424,9 @@ const getFilteredUsers = async (req, res) => {
   try {
     const { ...rest } = req.query;
 
-    const result = await User.find(rest).sort({ _id: -1 });
+    const result = await User.find({ ...rest, isSubsCribed: true }).sort({
+      _id: -1,
+    });
     res.status(200).json(result);
   } catch (error) {
     res.status(201).json({

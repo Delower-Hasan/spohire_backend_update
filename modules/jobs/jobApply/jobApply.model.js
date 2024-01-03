@@ -10,10 +10,6 @@ const jobApplySchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    playing_position: {
-      type: String,
-      required: true,
-    },
     region: {
       type: String,
       required: true,
@@ -26,7 +22,7 @@ const jobApplySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Phone: {
+    phone: {
       type: Number,
       required: true,
     },
@@ -38,6 +34,11 @@ const jobApplySchema = new mongoose.Schema(
     job: {
       type: mongoose.Schema.Types.ObjectId, // job id
       ref: "Job",
+      required: true,
+    },
+    userInfo: {
+      type: mongoose.Schema.Types.ObjectId, // job id
+      ref: "User",
       required: true,
     },
   },

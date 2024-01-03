@@ -7,9 +7,13 @@ const {
   DeleteJobApplyById,
 } = require("./jobApply.controller");
 const { handleMulterError } = require("../../../config/multerConfig");
+const multer = require("multer");
 const router = express.Router();
 
-router.post("/create", handleMulterError, createJobApply);
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+router.post("/create", upload.single("cv"), handleMulterError, createJobApply);
 router.get("/", getJobsApply);
 router.get("/:id", getJobApplyById);
 router.patch("/:id", handleMulterError, UpdateJobApplyById);

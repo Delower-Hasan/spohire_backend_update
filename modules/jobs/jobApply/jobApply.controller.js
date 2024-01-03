@@ -4,6 +4,12 @@ const JobApply = require("./jobApply.model");
 const createJobApply = async (req, res) => {
   try {
     const isExist = await Job.findById({ _id: req.body.job });
+
+    const pdf = req.file.buffer;
+    if (pdf) {
+      req.body["cv"] = req.file.buffer;
+    }
+
     if (isExist) {
       const newJobApply = new JobApply(req.body);
       const result = await newJobApply.save();
