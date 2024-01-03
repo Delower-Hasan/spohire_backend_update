@@ -268,7 +268,7 @@ const forgetPassword = async (req, res) => {
 
 const changePassword = async (req, res) => {
   const { old_password, new_password } = req.body;
-  console.log(req.body, "good");
+  // console.log(req.body, "good");
   try {
     const user = await User.findById({ _id: req.user._id });
     // console.log(req.user._id, "fjff");

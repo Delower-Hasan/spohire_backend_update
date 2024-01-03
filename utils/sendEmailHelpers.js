@@ -91,7 +91,7 @@ const sendNotificationMail = async (emails) => {
 
   let status = true;
   transporter.sendMail(mailOptions, (error, info) => {
-    console.log(info, error);
+    // console.log(info, error);
     if (info) {
       status = true;
     }
