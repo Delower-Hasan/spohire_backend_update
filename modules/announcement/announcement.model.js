@@ -6,7 +6,15 @@ const announcementSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    sports: {
+      type: String,
+      required: true,
+    },
     location: {
+      type: String,
+      required: true,
+    },
+    country: {
       type: String,
       required: true,
     },
@@ -16,7 +24,7 @@ const announcementSchema = new mongoose.Schema(
     },
     budget: {
       type: String,
-      required: false,
+      required: true,
     },
     description: {
       type: String,
@@ -24,7 +32,7 @@ const announcementSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["In Progress", "Completed", "Denied"],
+      enum: ["In Progress", "Published", "Denied"],
       required: true,
     },
   },

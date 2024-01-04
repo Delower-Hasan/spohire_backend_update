@@ -36,11 +36,11 @@ const jobApplySchema = new mongoose.Schema(
       ref: "Job",
       required: true,
     },
-    userInfo: {
-      type: mongoose.Schema.Types.ObjectId, // job id
-      ref: "User",
-      required: true,
-    },
+    // userInfo: {
+    //   type: mongoose.Schema.Types.ObjectId, // job id
+    //   ref: "User",
+    //   required: true,
+    // },
   },
   {
     timestamps: true,
