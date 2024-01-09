@@ -39,6 +39,7 @@ app.use("/api/v1/jobs", jobRoutes);
 app.use("/api/v1/job-applies", jobApplyRoutes);
 app.use("/api/v1/observations", observationRoutes);
 app.use("/api/v1/payments", paymentRoutes);
+app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
 
 
 
