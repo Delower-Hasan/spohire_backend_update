@@ -16,6 +16,7 @@ router.post(
   createJob
 );
 router.get("/", getJobs);
+
 router.get("/:id", getJobById);
 router.patch(
   "/:id",
