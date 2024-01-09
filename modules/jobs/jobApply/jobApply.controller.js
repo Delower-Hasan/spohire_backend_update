@@ -19,13 +19,13 @@ const createJobApply = async (req, res) => {
         data: result,
       });
     } else {
-      return res.status(201).json({
+      return res.status(500).json({
         success: false,
         message: "Job Not Found",
       });
     }
   } catch (error) {
-    res.status(201).json({
+    res.status(500).json({
       success: false,
       message: "Job Apply Create Failed",
       error_message: error.message,
@@ -42,7 +42,7 @@ const getJobsApply = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(201).json({
+    res.status(500).json({
       success: false,
       message: "Jobs Apply Retrieve Failed",
       error_message: error.message,
@@ -61,7 +61,7 @@ const getJobApplyById = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(201).json({
+    res.status(500).json({
       success: false,
       message: "Job Apply Retrieve Failed",
       error_message: error.message,
@@ -82,7 +82,7 @@ const UpdateJobApplyById = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(201).json({
+    res.status(500).json({
       success: false,
       message: "Job Apply Update Failed",
       error_message: error.message,
@@ -99,11 +99,40 @@ const DeleteJobApplyById = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(201).json({
+    res.status(500).json({
       success: false,
       message: "Job Apply Delete Failed",
       error_message: error.message,
     });
+  }
+};
+
+const getAppliedJobsByCreator = async (req, res) => {
+  try {
+    const appliedJobs = await JobApply.find({ creator: req.user._id });
+    res.status(200).json(appliedJobs);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed",
+      error_message: error.message,
+    });
+  }
+};
+
+const getPdfView = async (req, res) => {
+  const pdf = await JobApply.findById(req.params.id);
+  console.log(pdf?.cv, "rrrr");
+  try {
+    const pdf = await JobApply.findById(req.params.id);
+    if (!pdf) {
+      return res.status(404).json({ message: "PDF not found" });
+    }
+
+    res.setHeader("Content-Type", pdf.contentType);
+    res.send(pdf?.cv);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -113,4 +142,6 @@ module.exports = {
   getJobApplyById,
   UpdateJobApplyById,
   DeleteJobApplyById,
+  getAppliedJobsByCreator,
+  getPdfView,
 };

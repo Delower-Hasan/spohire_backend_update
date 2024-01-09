@@ -34,7 +34,7 @@ const jobSchema = new mongoose.Schema(
     },
     jobType: {
       type: String,
-      enum: ["Full-time", "Part-time", "Contract", "Temporary,"],
+      enum: ["Full-time", "Part-time", "Contract", "Temporary"],
       required: true,
     },
     salary: {
@@ -43,6 +43,11 @@ const jobSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+      required: true,
+    },
+    creator: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
   },
