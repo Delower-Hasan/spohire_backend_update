@@ -41,6 +41,7 @@ const jobApplySchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    contentType: { type: String, required: true },
     // userInfo: {
     //   type: mongoose.Schema.Types.ObjectId, // job id
     //   ref: "User",

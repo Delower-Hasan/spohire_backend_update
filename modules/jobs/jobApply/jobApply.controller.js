@@ -8,6 +8,7 @@ const createJobApply = async (req, res) => {
     const pdf = req.file.buffer;
     if (pdf) {
       req.body["cv"] = req.file.buffer;
+      req.body["contentType"] = req.file.mimetype;
     }
 
     if (isExist) {
@@ -122,7 +123,7 @@ const getAppliedJobsByCreator = async (req, res) => {
 
 const getPdfView = async (req, res) => {
   const pdf = await JobApply.findById(req.params.id);
-  console.log(pdf?.cv, "rrrr");
+
   try {
     const pdf = await JobApply.findById(req.params.id);
     if (!pdf) {
