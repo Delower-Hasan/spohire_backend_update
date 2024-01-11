@@ -15,6 +15,7 @@ const {
   updateUSerCreatedProfile,
 } = require("./user.controller");
 const { isAuth } = require("../../utils/middleware");
+const { upload } = require("../../config/multerConfig");
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.post("/signup", registerUser);
 router.post("/verifyEmail", emailVerification);
 router.get("/filteredUsers", getFilteredUsers);
 router.post("/login", loginUser);
-router.patch("/:id", updateUserInfo);
+router.patch("/:id", upload.single("image"), updateUserInfo);
 router.delete("/delete/:id", deleteUser);
 router.patch("/subscriptionStatus/:id", updateUserSubscriptionPlan);
 router.get("/:id", getUser);
