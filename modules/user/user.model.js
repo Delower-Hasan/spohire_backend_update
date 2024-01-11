@@ -121,6 +121,11 @@ const userSchema = new mongoose.Schema(
       enum: userSportsEnum,
       required: true,
     },
+    gallary: {
+      type: Array,
+      required: false,
+      default: [],
+    },
     isSubsCribed: {
       type: Boolean,
       required: false,

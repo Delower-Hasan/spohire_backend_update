@@ -329,11 +329,25 @@ const checkIsExistEmail = async (req, res) => {
 const updateUserInfo = async (req, res) => {
   // console.log(req.body, "bbb");
   try {
-    if (req.file) {
-      req.body["image"] = req.file.path;
+    // if (req.file) {
+    //   req.body["image"] = req.file.path;
+    // }
+    const isExist = await User.findOne({ _id: req.params.id });
+
+    if (req.files?.image) {
+      req.body["image"] = req.files?.image[0]?.path;
     }
 
-    const isExist = await User.findOne({ _id: req.params.id });
+    if (req.files?.gallery) {
+      const galleryPath = req.files?.gallery?.map((i) => i.path);
+      if (galleryPath?.length > 0) {
+        req.body["gallary"] = [...isExist.gallary, ...galleryPath];
+      }
+    }
+
+    // console.log(req.files, "req.files");
+    // console.log(req.files?.image[0]);
+
     if (isExist) {
       const result = await User.findByIdAndUpdate(
         { _id: req.params.id },
