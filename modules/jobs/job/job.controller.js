@@ -67,16 +67,14 @@ const UpdateJobById = async (req, res) => {
   try {
     if (req.file) {
       req.body["club_logo"] = req.file.path;
-      
-  
     }
     const result = await Job.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,
       { new: true }
     );
-    const data = await getUpdateNotificationsEmails();
-    await sendNotificationMail(data);
+    // const data = await getUpdateNotificationsEmails();
+    // await sendNotificationMail(data);
     res.status(200).json({
       success: true,
       message: "Job Update Success",

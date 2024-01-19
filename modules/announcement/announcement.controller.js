@@ -72,8 +72,8 @@ const UpdateAnnouncementById = async (req, res) => {
       req.body,
       { new: true }
     );
-    const data = await getUpdateNotificationsEmails();
-    await sendNotificationMail(data);
+    // const data = await getUpdateNotificationsEmails();
+    // await sendNotificationMail(data);
     res.status(200).json({
       success: true,
       message: "Announcement Update Success",
