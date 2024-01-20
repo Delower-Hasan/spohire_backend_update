@@ -37,6 +37,8 @@ const jobSchema = new mongoose.Schema(
       enum: ["Full-time", "Part-time", "Contract", "Temporary"],
       required: true,
     },
+    language: { type: String, required: true },
+
     salary: {
       type: Number,
       required: true,
