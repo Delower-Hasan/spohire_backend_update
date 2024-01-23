@@ -137,6 +137,21 @@ const getPdfView = async (req, res) => {
   }
 };
 
+const getMyAppliedJobs = async (req, res) => {
+  try {
+    const appliedJobs = await JobApply.find({
+      userInfo: req.user?._id,
+    }).populate("job");
+    res.status(200).send(appliedJobs);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed",
+      error_message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createJobApply,
   getJobsApply,
@@ -145,4 +160,5 @@ module.exports = {
   DeleteJobApplyById,
   getAppliedJobsByCreator,
   getPdfView,
+  getMyAppliedJobs,
 };

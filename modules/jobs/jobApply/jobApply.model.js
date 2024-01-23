@@ -42,11 +42,11 @@ const jobApplySchema = new mongoose.Schema(
       required: true,
     },
     contentType: { type: String, required: true },
-    // userInfo: {
-    //   type: mongoose.Schema.Types.ObjectId, // job id
-    //   ref: "User",
-    //   required: true,
-    // },
+    userInfo: {
+      type: mongoose.Schema.Types.ObjectId, // job id
+      ref: "User",
+      required: true,
+    },
   },
   {
     timestamps: true,

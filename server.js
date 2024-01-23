@@ -12,6 +12,7 @@ const jobRoutes = require("./modules/jobs/job/job.routes");
 const jobApplyRoutes = require("./modules/jobs/jobApply/jobApply.routes");
 const observationRoutes = require("./modules/observation/observation.routes");
 const paymentRoutes = require("./modules/payment/payment.routes");
+const notificationRoutes = require("./modules/notification/notification.routes");
 
 // conversations
 const chatRoutes = require("./modules/conversations/chat/chat.routes");
@@ -39,9 +40,8 @@ app.use("/api/v1/jobs", jobRoutes);
 app.use("/api/v1/job-applies", jobApplyRoutes);
 app.use("/api/v1/observations", observationRoutes);
 app.use("/api/v1/payments", paymentRoutes);
+app.use("/api/v1/notification", notificationRoutes);
 app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
-
-
 
 // conversations
 app.use("/api/v1/chats", chatRoutes);

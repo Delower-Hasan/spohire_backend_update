@@ -7,6 +7,7 @@ const {
   DeleteJobApplyById,
   getAppliedJobsByCreator,
   getPdfView,
+  getMyAppliedJobs,
 } = require("./jobApply.controller");
 const { handleMulterError } = require("../../../config/multerConfig");
 const multer = require("multer");
@@ -18,10 +19,11 @@ const upload = multer({ storage: storage });
 
 router.post("/create", upload.single("cv"), handleMulterError, createJobApply);
 router.get("/", getJobsApply);
+router.get("/myAppliedJobs", isAuth, getMyAppliedJobs);
 router.get("/appliedJobs", isAuth, getAppliedJobsByCreator);
 router.get("/viewPdf/:id", getPdfView);
 router.get("/:id", getJobApplyById);
 router.patch("/:id", handleMulterError, UpdateJobApplyById);
-router.delete("/:id", DeleteJobApplyById);
+router.delete("/:id", isAuth, DeleteJobApplyById);
 
 module.exports = router;

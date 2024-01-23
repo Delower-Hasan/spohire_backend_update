@@ -6,7 +6,9 @@ const {
   getJobById,
   UpdateJobById,
   DeleteJobById,
+  getMyJobOffers,
 } = require("./job.controller");
+const { isAuth } = require("../../../utils/middleware");
 const router = express.Router();
 
 router.post(
@@ -18,6 +20,7 @@ router.post(
 router.get("/", getJobs);
 
 router.get("/:id", getJobById);
+router.get("/getMyJobOffers", isAuth, getMyJobOffers);
 router.patch(
   "/:id",
   upload.single("club_logo"),
