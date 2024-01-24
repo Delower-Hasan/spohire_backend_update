@@ -1,4 +1,5 @@
 const User = require("../../user/user.model");
+const Message = require("../message/message.model");
 const Chat = require("./chat.model");
 
 const createChat = async (req, res) => {
@@ -36,6 +37,8 @@ const userChats = async (req, res) => {
     const result = await Chat.find({
       members: { $in: [req.params.userId] },
     });
+
+    // console.log(result, "rsss");
 
     const userArray = result.map((i) =>
       i?.members.find((j) => j !== req.params.userId)

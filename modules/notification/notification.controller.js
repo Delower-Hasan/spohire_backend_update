@@ -19,7 +19,9 @@ const createNotification = async (req, res) => {
 
 const getMyNotification = async (req, res) => {
   try {
-    const myNotification = await Notification.find({ user: req.user?._id });
+    const myNotification = await Notification.find({
+      user: req.user?._id,
+    }).sort({ _id: -1 });
     res.status(200).send(myNotification);
   } catch (error) {
     res.status(500).send({
@@ -53,8 +55,37 @@ const deleteNotification = async (req, res) => {
   }
 };
 
+const putMyNotificationInSeen = async (req, res) => {
+  try {
+    const result = await Notification.updateMany(
+      { user: req.user?._id },
+      { $set: { isSeen: true } },
+      { new: true }
+    );
+
+    if (result.nModified === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No unseen notifications found for the user.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User notifications updated successfully!",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createNotification,
   getMyNotification,
   deleteNotification,
+  putMyNotificationInSeen,
 };

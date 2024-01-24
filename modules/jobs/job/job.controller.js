@@ -48,7 +48,7 @@ const getJobs = async (req, res) => {
 
 const getJobById = async (req, res) => {
   try {
-    const result = await Job.findById({ _id: req.params.id });
+    const result = await Job.findById({ _id: req.params.id }).sort({ _id: -1 });
     res.status(200).json({
       success: true,
       message: "Job Retrieve Success",
@@ -108,7 +108,7 @@ const DeleteJobById = async (req, res) => {
 
 const getMyJobOffers = async (req, res) => {
   try {
-    const jobs = await Job.find({ creator: req.user?._id });
+    const jobs = await Job.find({ creator: req.user?._id }).sort({ _id: -1 });
     res.status(200).send(jobs);
   } catch (error) {
     res.status(201).json({

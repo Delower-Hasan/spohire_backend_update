@@ -20,6 +20,15 @@ const notificationSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    jobId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Job",
+      required: false,
+    },
+    isSeen: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

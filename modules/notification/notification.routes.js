@@ -4,12 +4,15 @@ const {
   createNotification,
   getMyNotification,
   deleteNotification,
+  putMyNotificationInSeen,
 } = require("./notification.controller");
 
 const router = express.Router();
 
 router.post("/create", isAuth, createNotification);
 router.get("/myNotifications", isAuth, getMyNotification);
+
+router.patch("/updateMyNotificationStatus", isAuth, putMyNotificationInSeen);
 
 router.delete("/:id", isAuth, deleteNotification);
 

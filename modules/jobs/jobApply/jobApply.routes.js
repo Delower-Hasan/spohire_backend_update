@@ -8,6 +8,7 @@ const {
   getAppliedJobsByCreator,
   getPdfView,
   getMyAppliedJobs,
+  getApplyJobsByJobId,
 } = require("./jobApply.controller");
 const { handleMulterError } = require("../../../config/multerConfig");
 const multer = require("multer");
@@ -21,6 +22,7 @@ router.post("/create", upload.single("cv"), handleMulterError, createJobApply);
 router.get("/", getJobsApply);
 router.get("/myAppliedJobs", isAuth, getMyAppliedJobs);
 router.get("/appliedJobs", isAuth, getAppliedJobsByCreator);
+router.get("/appliedJobsByJobId/:id", isAuth, getApplyJobsByJobId);
 router.get("/viewPdf/:id", getPdfView);
 router.get("/:id", getJobApplyById);
 router.patch("/:id", handleMulterError, UpdateJobApplyById);
