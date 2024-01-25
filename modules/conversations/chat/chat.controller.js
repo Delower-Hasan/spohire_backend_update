@@ -38,17 +38,56 @@ const userChats = async (req, res) => {
       members: { $in: [req.params.userId] },
     });
 
-    // console.log(result, "rsss");
-
     const userArray = result.map((i) =>
       i?.members.find((j) => j !== req.params.userId)
     );
 
+    const userArrayWith = result.map((i) => {
+      {
+        if (i?.members.find((j) => j !== req.params.userId)) {
+          return {
+            conversationId: i?._id,
+            userId: i?.members.find((j) => j !== req.params.userId),
+          };
+        }
+      }
+    });
+
+    async function getMessagesForConversation(conversationId) {
+      const messages = await Message.find({
+        chat: conversationId,
+      });
+      return messages?.length;
+    }
+
+    // Use Promise.all to resolve all promises in the array
+    const newArrayWIthMessageLength = await Promise.all(
+      userArrayWith.map(async (i) => {
+        return {
+          message: await getMessagesForConversation(i.conversationId),
+          user: i?.userId,
+        };
+      })
+    );
+
+    // console.log(newArrayWIthMessageLength, "newww");
+
     const userDetailsArray = await User.find({ _id: { $in: userArray } });
 
-    // console.log(userDetailsArray, "dddd");
+    const updatedUserDetailsArray = userDetailsArray.map((userDetail) => {
+      const correspondingMessage = newArrayWIthMessageLength.find(
+        (messageObj) => messageObj.user === userDetail._id.toString()
+      );
 
-    res.status(200).send(userDetailsArray);
+      return {
+        ...userDetail.toObject(),
+        message: correspondingMessage ? correspondingMessage.message : null,
+      };
+    });
+
+    // console.log(updatedUserDetailsArray, "updatedUserDetailsArray");
+
+    res.status(200).send(updatedUserDetailsArray);
   } catch (error) {
     res.status(500).send(error);
   }
