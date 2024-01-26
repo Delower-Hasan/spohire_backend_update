@@ -134,7 +134,7 @@ const userSchema = new mongoose.Schema(
     subscriptionName: {
       type: String,
       required: false,
-      enum: ["Gold", "Silver", "Bronze"],
+      enum: ["Gold", "Silver", "Bronze", ""],
       default: undefined,
     },
     isCreatedProfile: {

@@ -454,6 +454,32 @@ const getFilteredUsers = async (req, res) => {
   }
 };
 
+const cancleSubscription = async (req, res) => {
+  // console.log("bvodyy");
+  // res.send("Success");
+  try {
+    const result = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        isSubsCribed: false,
+        isCreatedProfile: false,
+        subscriptionName: "",
+      },
+      { new: true }
+    );
+    res.status(200).json({
+      success: true,
+      message: "Subscription cancled successfully!",
+      data: result,
+    });
+  } catch (error) {
+    res.status(201).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
@@ -469,4 +495,5 @@ module.exports = {
   updateUserSubscriptionPlan,
   getFilteredUsers,
   updateUSerCreatedProfile,
+  cancleSubscription,
 };
