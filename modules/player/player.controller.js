@@ -1,30 +1,82 @@
+const { sendAddProfileMail } = require("../../utils/sendEmailHelpers");
 const User = require("../user/user.model");
 const Player = require("./player.model");
+const bcrcypt = require("bcryptjs");
 
 const createPlayer = async (req, res) => {
   try {
-    const isExist = await User.findById({ _id: req.body.user });
-    if (isExist) {
-      if (req.files) {
-        let files = [];
-        if (req.files?.gallery) {
-          for (let i = 0; i < req.files?.gallery.length; i++) {
-            files.push(req.files?.gallery[i].path);
-          }
-          req.body["gallery"] = files;
-        }
+    const isExist = await User.findOne({ email: req.body.email });
+    if (!isExist) {
+      if (req.files?.image) {
+        req.body["image"] = req.files?.image[0]?.path;
       }
-      const newNewPlayer = new Player(req.body);
+
+      if (req.files?.gallery) {
+        const galleryPath = req.files?.gallery?.map((i) => i.path);
+        req.body["gallary"] = galleryPath;
+      }
+
+      const newData = {
+        ...req.body,
+        password: bcrcypt.hashSync(req.body.password),
+      };
+
+      const newNewPlayer = new User(newData);
+
       const result = await newNewPlayer.save();
+
+      const sendEmail = await sendAddProfileMail({
+        email: req.body.email,
+        password: req.body.password,
+      });
       res.status(200).json({
         success: true,
         message: "Player Create Success",
         data: result,
       });
     } else {
+      res.status(400).json({
+        success: false,
+        message: "Player already Added",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "Player Create Failed",
+      error_message: error.message,
+    });
+  }
+};
+
+const buySubscriptionForPlayer = async (req, res) => {
+  console.log(req.body, "ddbgg");
+  try {
+    const isExist = await User.findById(req.body.id);
+    if (isExist) {
+      const result = await User.findByIdAndUpdate(
+        req.body.id,
+        {
+          isSubsCribed: true,
+          subscriptionName: req.body.subscriptionName,
+          isCreatedProfile: true,
+          subscriptionDate: req.body.subscriptionDate,
+          subscriptionType: req.body.subscriptionType,
+        },
+        {
+          new: true,
+        }
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Subscription added Successfully!",
+        data: result,
+      });
+    } else {
       res.status(201).json({
         success: false,
-        message: "Player Create Failed. User Not Found",
+        message: "User not found!",
       });
     }
   } catch (error) {
@@ -123,4 +175,5 @@ module.exports = {
   getPlayerById,
   UpdatePlayerById,
   DeletePlayerById,
+  buySubscriptionForPlayer,
 };

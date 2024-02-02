@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema(
       enum: userRoleEnum,
       required: true,
     },
+    referral: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: false,
+    },
     image: {
       type: String,
       required: false,
@@ -34,13 +39,13 @@ const userSchema = new mongoose.Schema(
       type: Object,
       country_code: {
         type: String,
-        required: true,
+        required: false,
       },
       number: {
         type: Number,
-        required: true,
+        required: false,
       },
-      required: true,
+      required: false,
     },
     nationality: {
       type: String,
@@ -114,7 +119,7 @@ const userSchema = new mongoose.Schema(
     },
     date_of_birth: {
       type: String,
-      required: true,
+      required: false,
     },
     sports: {
       type: String,
@@ -137,20 +142,15 @@ const userSchema = new mongoose.Schema(
       enum: ["Gold", "Silver", "Bronze", ""],
       default: undefined,
     },
+    subscriptionDate: {
+      type: String,
+      required: false,
+    },
     isCreatedProfile: {
       type: Boolean,
       required: false,
       default: false,
     },
-    // otp: {
-    //   type: String,
-    //   required: true,
-    // },
-    // isVerified: {
-    //   type: Boolean,
-    //   default: false,
-    //   required: false,
-    // },
   },
   {
     timestamps: true,

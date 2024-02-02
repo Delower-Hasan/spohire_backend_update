@@ -180,7 +180,7 @@ const deleteUser = async (req, res) => {
       .exec()
       .then((result) => {
         res.status(200).send({
-          message: `${result.name} is successfully removed!`,
+          message: `${result?.first_name} ${result?.last_name} is successfully removed!`,
           status: 200,
         });
       })
@@ -480,6 +480,19 @@ const cancleSubscription = async (req, res) => {
   }
 };
 
+const getUserReferallProfile = async (req, res) => {
+  console.log(req.user, "dd");
+  try {
+    const users = await User.find({ referral: req.user?._id });
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(201).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
@@ -496,4 +509,5 @@ module.exports = {
   getFilteredUsers,
   updateUSerCreatedProfile,
   cancleSubscription,
+  getUserReferallProfile,
 };

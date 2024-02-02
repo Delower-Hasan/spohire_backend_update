@@ -17,7 +17,7 @@ const playerSchema = new mongoose.Schema(
     },
     additional_passport: {
       type: String,
-      required: true,
+      required: false,
     },
     position: {
       type: String,
@@ -41,19 +41,19 @@ const playerSchema = new mongoose.Schema(
       day: Number,
       month: Number,
       year: Number,
-      required: true,
+      required: false,
     },
     phone_number: {
       type: Object,
       country_code: {
         type: String,
-        required: true,
+        required: false,
       },
       number: {
         type: Number,
-        required: true,
+        required: false,
       },
-      required: true,
+      required: false,
     },
     belong_to_the_club: {
       type: String,
@@ -89,6 +89,10 @@ const playerSchema = new mongoose.Schema(
       required: true,
     },
     expectations_from_new_club: {
+      type: String,
+      required: false,
+    },
+    subscriptionType: {
       type: String,
       required: false,
     },

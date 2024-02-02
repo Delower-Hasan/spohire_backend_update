@@ -101,9 +101,40 @@ const sendNotificationMail = async (emails) => {
   });
   return status;
 };
+const sendAddProfileMail = async (data) => {
+  const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from: process.env.MAIL_USER,
+    to: data?.email,
+    subject: `Welcome to Sphire`,
+    html: `
+    <div>
+    <p>Here is your login credentials</p>
+    <p>Email: ${data?.email}</p>
+    <p>Email: ${data?.password}</p>
+    </div>
+  `,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      return true;
+    }
+  });
+};
 
 module.exports = {
   sendForgotOTPMail,
   sendWelcomeMail,
   sendNotificationMail,
+  sendAddProfileMail,
 };
