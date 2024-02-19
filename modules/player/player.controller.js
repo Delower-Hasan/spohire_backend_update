@@ -5,7 +5,7 @@ const bcrcypt = require("bcryptjs");
 
 const createPlayer = async (req, res) => {
   try {
-    const isExist = await User.findOne({ email: req.body.email });
+    const isExist = await Player.findOne({ fullName: req.body.fullName });
     if (!isExist) {
       if (req.files?.image) {
         req.body["image"] = req.files?.image[0]?.path;
@@ -16,19 +16,10 @@ const createPlayer = async (req, res) => {
         req.body["gallary"] = galleryPath;
       }
 
-      const newData = {
-        ...req.body,
-        password: bcrcypt.hashSync(req.body.password),
-      };
-
-      const newNewPlayer = new User(newData);
+      const newNewPlayer = new Player(req.body);
 
       const result = await newNewPlayer.save();
 
-      const sendEmail = await sendAddProfileMail({
-        email: req.body.email,
-        password: req.body.password,
-      });
       res.status(200).json({
         success: true,
         message: "Player Create Success",
@@ -50,9 +41,8 @@ const createPlayer = async (req, res) => {
 };
 
 const buySubscriptionForPlayer = async (req, res) => {
-  console.log(req.body, "ddbgg");
   try {
-    const isExist = await User.findById(req.body.id);
+    const isExist = await Player.findById(req.body.id);
     if (isExist) {
       const result = await User.findByIdAndUpdate(
         req.body.id,
@@ -108,11 +98,7 @@ const getPlayers = async (req, res) => {
 const getPlayerById = async (req, res) => {
   try {
     const result = await Player.findById({ _id: req.params.id });
-    res.status(200).json({
-      success: true,
-      message: "Player Retrieve Success",
-      data: result,
-    });
+    res.status(200).json(result);
   } catch (error) {
     res.status(201).json({
       success: false,
@@ -154,6 +140,7 @@ const UpdatePlayerById = async (req, res) => {
 
 const DeletePlayerById = async (req, res) => {
   try {
+    console.log("jfkjfk");
     const result = await Player.findByIdAndDelete({ _id: req.params.id });
     res.status(200).json({
       success: true,

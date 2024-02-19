@@ -31,7 +31,7 @@ const createJob = async (req, res) => {
 
 const getJobs = async (req, res) => {
   try {
-    const result = await Job.find({}).sort({ _id: -1 });
+    const result = await Job.find({ isActive: true }).sort({ _id: -1 });
     res.status(200).json({
       success: true,
       message: "Jobs Retrieve Success",

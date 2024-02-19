@@ -7,6 +7,7 @@ const {
   sendWelcomeMail,
 } = require("../../utils/sendEmailHelpers");
 const Setting = require("../setting/setting.model");
+const Player = require("../player/player.model");
 
 const registerUser = async (req, res) => {
   try {
@@ -442,9 +443,13 @@ const getFilteredUsers = async (req, res) => {
   try {
     const { ...rest } = req.query;
 
-    const result = await User.find({ ...rest, isSubsCribed: true }).sort({
+    const result = await Player.find({ ...rest, isSubsCribed: true }).sort({
       _id: -1,
     });
+
+    // const result = await User.find({ ...rest, isSubsCribed: true }).sort({
+    //   _id: -1,
+    // });
     res.status(200).json(result);
   } catch (error) {
     res.status(201).json({
@@ -481,9 +486,9 @@ const cancleSubscription = async (req, res) => {
 };
 
 const getUserReferallProfile = async (req, res) => {
-  console.log(req.user, "dd");
   try {
-    const users = await User.find({ referral: req.user?._id });
+    // const users = await User.find({ referral: req.user?._id });
+    const users = await Player.find({ referral: req.user?._id });
     res.status(200).send(users);
   } catch (error) {
     res.status(201).json({

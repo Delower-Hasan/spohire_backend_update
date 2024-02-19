@@ -13,7 +13,7 @@ const paymentSchema = new mongoose.Schema(
     },
     planName: {
       type: String,
-      required: true,
+      required: false,
     },
     amount: {
       type: Number,
@@ -24,6 +24,10 @@ const paymentSchema = new mongoose.Schema(
       enum: ["Pending", "Paid", "Denied"],
       required: false,
       default: "Paid",
+    },
+    purpose: {
+      type: String,
+      required: false,
     },
   },
   {

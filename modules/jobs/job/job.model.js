@@ -47,6 +47,22 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
+    subscriptionDate: {
+      type: String,
+      required: false,
+    },
+    expirationDate: {
+      type: String,
+      required: false,
+      default: false,
+    },
+    isActive: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+
     creator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

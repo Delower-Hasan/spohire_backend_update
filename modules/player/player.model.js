@@ -1,13 +1,24 @@
 const mongoose = require("mongoose");
+const { userRoleEnum, userSportsEnum } = require("../user/user.constant");
 
 const playerSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId, // user id
+    role: {
+      type: String,
+      enum: userRoleEnum,
+      required: true,
+    },
+    referral: {
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    full_name: {
+    image: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
+    fullName: {
       type: String,
       required: true,
     },
@@ -19,9 +30,8 @@ const playerSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    position: {
+    mainPosition: {
       type: String,
-      enum: ["Left", "Right", "Ambidextrous"],
       required: false,
     },
     height: {
@@ -32,36 +42,29 @@ const playerSchema = new mongoose.Schema(
       type: Number,
       required: false,
     },
-    dominant_hand: {
+    alterPosition: {
       type: String,
       required: false,
     },
-    date_of_birth: {
-      type: Object,
-      day: Number,
-      month: Number,
-      year: Number,
+    dominantHand: {
+      type: String,
       required: false,
     },
-    phone_number: {
-      type: Object,
-      country_code: {
-        type: String,
-        required: false,
-      },
-      number: {
-        type: Number,
-        required: false,
-      },
+    social_media: {
+      type: [String],
       required: false,
     },
     belong_to_the_club: {
       type: String,
       enum: ["Yes", "No"],
-      required: true,
+      required: false,
     },
-    social_media: {
-      type: [String],
+    club_name: {
+      type: String,
+      required: false,
+    },
+    club_position: {
+      type: String,
       required: false,
     },
     experience: {
@@ -82,23 +85,59 @@ const playerSchema = new mongoose.Schema(
     },
     strengths_advantage: {
       type: String,
-      required: true,
+      required: false,
     },
     about_me: {
       type: String,
-      required: true,
+      required: false,
     },
     expectations_from_new_club: {
       type: String,
       required: false,
     },
-    subscriptionType: {
+    date_of_birth: {
       type: String,
       required: false,
     },
-    gallery: {
-      type: [String],
+    sports: {
+      type: String,
+      enum: userSportsEnum,
+      required: true,
+    },
+    gallary: {
+      type: Array,
       required: false,
+      default: [],
+    },
+    isSubsCribed: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    subscriptionName: {
+      type: String,
+      required: false,
+      enum: ["Gold", "Silver", "Bronze", ""],
+      default: undefined,
+    },
+    subscriptionDate: {
+      type: String,
+      required: false,
+    },
+    isCreatedProfile: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    expirationDate: {
+      type: String,
+      required: false,
+      default: false,
+    },
+    isActive: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
   },
   {

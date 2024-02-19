@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
+const cron = require("node-cron");
 const PORT = process.env.PORT || 8000;
 const path = require("path");
 
@@ -46,6 +47,16 @@ app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
 // conversations
 app.use("/api/v1/chats", chatRoutes);
 app.use("/api/v1/messages", messageRoutes);
+
+// Schedule task to run daily at midnight
+cron.schedule("0 0 * * *", async () => {
+  const currentDate = new Date();
+
+  // await JobPost.updateMany(
+  //   { expirationDate: { $lt: currentDate } },
+  //   { status: "inactive" }
+  // );
+});
 
 // static file serving
 // app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
