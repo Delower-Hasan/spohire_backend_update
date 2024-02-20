@@ -23,6 +23,8 @@ const app = express();
 const http = require("http");
 const Server = http.createServer(app);
 const socketIo = require("socket.io");
+const Job = require("./modules/jobs/job/job.model");
+const Player = require("./modules/player/player.model");
 
 // middleware
 app.use(cors());
@@ -52,10 +54,14 @@ app.use("/api/v1/messages", messageRoutes);
 cron.schedule("0 0 * * *", async () => {
   const currentDate = new Date();
 
-  // await JobPost.updateMany(
-  //   { expirationDate: { $lt: currentDate } },
-  //   { status: "inactive" }
-  // );
+  await Job.updateMany(
+    { expirationDate: { $lt: currentDate } },
+    { isActive: false }
+  );
+  await Player.updateMany(
+    { expirationDate: { $lt: currentDate } },
+    { isActive: false }
+  );
 });
 
 // static file serving
