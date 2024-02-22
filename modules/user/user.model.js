@@ -151,6 +151,11 @@ const userSchema = new mongoose.Schema(
       required: false,
       default: false,
     },
+    addedProfile: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   {
     timestamps: true,

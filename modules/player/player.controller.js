@@ -42,16 +42,12 @@ const createPlayer = async (req, res) => {
 
 const buySubscriptionForPlayer = async (req, res) => {
   try {
-    const isExist = await Player.findById(req.body.id);
+    const isExist = await User.findById(req.body.id);
     if (isExist) {
       const result = await User.findByIdAndUpdate(
         req.body.id,
         {
-          isSubsCribed: true,
-          subscriptionName: req.body.subscriptionName,
-          isCreatedProfile: true,
-          subscriptionDate: req.body.subscriptionDate,
-          subscriptionType: req.body.subscriptionType,
+          addedProfile: true,
         },
         {
           new: true,

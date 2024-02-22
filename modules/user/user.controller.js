@@ -466,9 +466,7 @@ const cancleSubscription = async (req, res) => {
     const result = await User.findByIdAndUpdate(
       req.user._id,
       {
-        isSubsCribed: false,
-        isCreatedProfile: false,
-        subscriptionName: "",
+        addedProfile: false,
       },
       { new: true }
     );
