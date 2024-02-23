@@ -93,7 +93,7 @@ const getPlayers = async (req, res) => {
 
 const getPlayerById = async (req, res) => {
   try {
-    const result = await Player.findById({ _id: req.params.id });
+    const result = await Player.findById({ _id: req.params.id }).populate("referral");
     res.status(200).json(result);
   } catch (error) {
     res.status(201).json({
@@ -152,6 +152,51 @@ const DeletePlayerById = async (req, res) => {
   }
 };
 
+const updatePlayerInfo = async (req, res) => {
+  try {
+    const isExist = await Player.findOne({ _id: req.params.id });
+
+    if (req.files?.image) {
+      req.body["image"] = req.files?.image[0]?.path;
+    }
+
+    if (req.files?.gallery) {
+      const galleryPath = req.files?.gallery?.map((i) => i.path);
+      if (galleryPath?.length > 0) {
+        req.body["gallary"] = [...isExist.gallary, ...galleryPath];
+      }
+    }
+
+    // console.log(req.files, "req.files");
+    // console.log(req.files?.image[0]);
+
+    if (isExist) {
+      const result = await Player.findByIdAndUpdate(
+        { _id: req.params.id },
+        req.body,
+        {
+          new: true,
+        }
+      );
+      res.status(200).json({
+        status: true,
+        message: "Player Info Update successfully",
+        data: result,
+      });
+    } else {
+      res.status(401).json({
+        status: false,
+        message: "Update unsuccessful",
+      });
+    }
+  } catch (error) {
+    res.status(201).json({
+      status: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createPlayer,
   getPlayers,
@@ -159,4 +204,5 @@ module.exports = {
   UpdatePlayerById,
   DeletePlayerById,
   buySubscriptionForPlayer,
+  updatePlayerInfo,
 };

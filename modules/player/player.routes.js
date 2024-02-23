@@ -7,6 +7,7 @@ const {
   UpdatePlayerById,
   DeletePlayerById,
   buySubscriptionForPlayer,
+  updatePlayerInfo,
 } = require("./player.controller");
 const { isAuth } = require("../../utils/middleware");
 const router = express.Router();
@@ -26,9 +27,11 @@ router.get("/", getPlayers);
 router.get("/:id", getPlayerById);
 router.patch(
   "/:id",
-  upload.fields([{ name: "gallery", maxCount: 6 }]),
-  handleMulterError,
-  UpdatePlayerById
+  upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "gallery", maxCount: 3 },
+  ]),
+  updatePlayerInfo
 );
 router.delete("/:id", DeletePlayerById);
 

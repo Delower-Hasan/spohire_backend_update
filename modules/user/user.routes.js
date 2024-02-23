@@ -28,7 +28,7 @@ router.post("/login", loginUser);
 // router.patch("/:id", upload.single("image"), updateUserInfo);
 
 router.delete("/delete/:id", isAuth, deleteUser);
-router.patch("/subscriptionStatus/:id", updateUserSubscriptionPlan);
+router.patch("/subscriptionStatus/:id", isAuth, updateUserSubscriptionPlan);
 router.get("/userReferrals", isAuth, getUserReferallProfile);
 router.get("/:id", getUser);
 router.get("/user-info/me", isAuth, getUserInfo);

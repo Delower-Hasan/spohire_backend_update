@@ -156,6 +156,16 @@ const userSchema = new mongoose.Schema(
       required: false,
       default: false,
     },
+    expirationDate: {
+      type: String,
+      required: false,
+      default: false,
+    },
+    isActive: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   {
     timestamps: true,
