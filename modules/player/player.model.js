@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 const { userRoleEnum, userSportsEnum } = require("../user/user.constant");
 
+// schema for adding player/coach to the marketplace
 const playerSchema = new mongoose.Schema(
   {
+    firstName: String,
+    lastName: String,
     role: {
       type: String,
       enum: userRoleEnum,
@@ -22,6 +25,10 @@ const playerSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    gender: String,
+    phone_number: String,
+    country: String,
+    city: String,
     nationality: {
       type: String,
       required: true,
@@ -138,6 +145,15 @@ const playerSchema = new mongoose.Schema(
       type: Boolean,
       required: false,
       default: true,
+    },
+    packageChoosed: {
+      //1 months, 2 months, 3 months
+      type: Number,
+      required: true,
+    },
+    isRenewable: {
+      type: Boolean,
+      required: true,
     },
   },
   {

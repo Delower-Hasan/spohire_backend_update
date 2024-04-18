@@ -12,8 +12,6 @@ const Player = require("../player/player.model");
 const registerUser = async (req, res) => {
   try {
     const isExist = await User.findOne({ email: req.body.email });
-
-    // const isVerified = isExist?.isVerified;
     if (isExist) {
       return res.status(403).send({
         message: `${req.body.email} is already Exist!`,
@@ -33,7 +31,9 @@ const registerUser = async (req, res) => {
       });
 
       const user = await newUser.save();
+
       const token = await generateToken(user);
+      
       res.status(200).send({
         message: "We have created account successfully",
         status: 200,

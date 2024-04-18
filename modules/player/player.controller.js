@@ -93,7 +93,9 @@ const getPlayers = async (req, res) => {
 
 const getPlayerById = async (req, res) => {
   try {
-    const result = await Player.findById({ _id: req.params.id }).populate("referral");
+    const result = await Player.findById({ _id: req.params.id }).populate(
+      "referral"
+    );
     res.status(200).json(result);
   } catch (error) {
     res.status(201).json({

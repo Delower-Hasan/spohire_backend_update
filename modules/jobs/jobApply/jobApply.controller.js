@@ -4,7 +4,6 @@ const JobApply = require("./jobApply.model");
 const createJobApply = async (req, res) => {
   try {
     const isExist = await Job.findById({ _id: req.body.job });
-
     const pdf = req.file.buffer;
     if (pdf) {
       req.body["cv"] = req.file.buffer;
@@ -108,18 +107,18 @@ const DeleteJobApplyById = async (req, res) => {
   }
 };
 
-const getAppliedJobsByCreator = async (req, res) => {
-  try {
-    const appliedJobs = await JobApply.find({ creator: req.user._id });
-    res.status(200).json(appliedJobs);
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Failed",
-      error_message: error.message,
-    });
-  }
-};
+// const getAppliedJobsByCreator = async (req, res) => {
+//   try {
+//     const appliedJobs = await JobApply.find({ creator: req.user._id });
+//     res.status(200).json(appliedJobs);
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: "Failed",
+//       error_message: error.message,
+//     });
+//   }
+// };
 
 const getPdfView = async (req, res) => {
   const pdf = await JobApply.findById(req.params.id);
@@ -173,7 +172,7 @@ module.exports = {
   getJobApplyById,
   UpdateJobApplyById,
   DeleteJobApplyById,
-  getAppliedJobsByCreator,
+  // getAppliedJobsByCreator,
   getPdfView,
   getMyAppliedJobs,
   getApplyJobsByJobId,

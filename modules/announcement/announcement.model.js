@@ -38,6 +38,15 @@ const announcementSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    paymentMathod: {
+      type: String,
+      required: false,
+    },
+    isPaid: {
+      type: Boolean,
+      required: false,
+    },
+
     // status: {
     //   type: String,
     //   enum: ["In Progress", "Published", "Denied"],

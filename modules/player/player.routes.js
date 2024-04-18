@@ -9,6 +9,7 @@ const {
   buySubscriptionForPlayer,
   updatePlayerInfo,
 } = require("./player.controller");
+
 const { isAuth } = require("../../utils/middleware");
 const router = express.Router();
 

@@ -30,8 +30,13 @@ const jobSchema = new mongoose.Schema(
     role: {
       type: String,
       // enum: ["Coach", "Player"],
+      required: false,
+    },
+    category: {
+      type: String,
       required: true,
     },
+    paymentMethod: String,
     jobType: {
       type: String,
       enum: ["Full-time", "Part-time", "Contract", "Temporary"],
@@ -49,6 +54,7 @@ const jobSchema = new mongoose.Schema(
     },
 
     subscriptionDate: {
+      //apply date
       type: String,
       required: false,
     },
@@ -61,6 +67,16 @@ const jobSchema = new mongoose.Schema(
       type: Boolean,
       required: false,
       default: true,
+    },
+    packagechoose: {
+      //label
+      type: Number,
+      required: true,
+    },
+    tags: {
+      //label
+      type: String,
+      required: false,
     },
 
     creator: {
