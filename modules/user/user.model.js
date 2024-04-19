@@ -26,6 +26,35 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    about_me: {
+      type: String,
+      required: false,
+    },
+    gallary: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    experience: {
+      type: [Object],
+      start_year: {
+        type: Number,
+        required: true,
+      },
+      end_year: {
+        type: Number,
+        required: true,
+      },
+      social_media: {
+        type: [String],
+        required: false,
+      },
+      club_name: {
+        type: String,
+        required: true,
+      },
+      required: false,
+    },
     password: {
       type: String,
       required: true,
@@ -76,10 +105,13 @@ const userSchema = new mongoose.Schema(
       required: false,
       default: false,
     },
-
+    packageChoosed: {
+      type: Number,
+      required: false,
+    },
     isRenewable: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     isActive: {
       type: Boolean,

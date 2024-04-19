@@ -66,7 +66,7 @@ const jobSchema = new mongoose.Schema(
     packagechoose: {
       //label
       type: Number,
-      required: true,
+      required: false,
     },
     tags: {
       //label
