@@ -7,6 +7,7 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     club_logo: {
+      //company logo
       type: String,
       required: true,
     },
@@ -26,11 +27,6 @@ const jobSchema = new mongoose.Schema(
     country: {
       type: String,
       required: true,
-    },
-    role: {
-      type: String,
-      // enum: ["Coach", "Player"],
-      required: false,
     },
     category: {
       type: String,
@@ -54,7 +50,6 @@ const jobSchema = new mongoose.Schema(
     },
 
     subscriptionDate: {
-      //apply date
       type: String,
       required: false,
     },
