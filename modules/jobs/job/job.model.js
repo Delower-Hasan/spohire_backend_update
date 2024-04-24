@@ -39,7 +39,6 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     language: { type: String, required: true },
-
     salary: {
       type: Number,
       required: true,

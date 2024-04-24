@@ -9,7 +9,6 @@ const createJobApply = async (req, res) => {
       req.body["cv"] = req.file.buffer;
       req.body["contentType"] = req.file.mimetype;
     }
-
     if (isExist) {
       const newJobApply = new JobApply(req.body);
       const result = await newJobApply.save();
