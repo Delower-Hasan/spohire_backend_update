@@ -24,6 +24,7 @@ router.post(
 );
 
 router.patch("/buySubscriptionForPlayer", isAuth, buySubscriptionForPlayer);
+
 router.get("/", getPlayers);
 router.get("/:id", getPlayerById);
 router.patch(

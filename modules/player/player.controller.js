@@ -5,7 +5,7 @@ const bcrcypt = require("bcryptjs");
 
 const createPlayer = async (req, res) => {
   try {
-    const isExist = await Player.findOne({ fullName: req.body.fullName });
+    const isExist = await Player.findOne({ email: req.body.email });
     if (!isExist) {
       if (req.files?.image) {
         req.body["image"] = req.files?.image[0]?.path;

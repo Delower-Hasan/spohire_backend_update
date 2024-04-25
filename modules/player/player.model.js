@@ -14,7 +14,7 @@ const playerSchema = new mongoose.Schema(
     referral: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
     },
     image: {
       type: String,
@@ -23,7 +23,7 @@ const playerSchema = new mongoose.Schema(
     },
     fullName: {
       type: String,
-      required: true,
+      required: false,
     },
     gender: String,
     phone_number: String,
@@ -33,9 +33,14 @@ const playerSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
     additional_passport: {
       type: String,
       required: false,
+      default: "N/A",
     },
     mainPosition: {
       type: String,
@@ -63,7 +68,7 @@ const playerSchema = new mongoose.Schema(
     },
     belong_to_the_club: {
       type: String,
-      enum: ["Yes", "No"],
+      enum: ["yes", "no"],
       required: false,
     },
     club_name: {
@@ -109,7 +114,7 @@ const playerSchema = new mongoose.Schema(
     sports: {
       type: String,
       enum: userSportsEnum,
-      required: true,
+      required: false,
     },
     gallary: {
       type: Array,
@@ -154,6 +159,7 @@ const playerSchema = new mongoose.Schema(
     isRenewable: {
       type: Boolean,
       required: true,
+      default: false,
     },
   },
   {
