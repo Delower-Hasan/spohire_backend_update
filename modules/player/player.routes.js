@@ -17,7 +17,7 @@ router.post(
   "/create",
   upload.fields([
     { name: "image", maxCount: 1 },
-    { name: "gallery", maxCount: 3 },
+    { name: "gallary", maxCount: 3 },
   ]),
   isAuth,
   createPlayer
@@ -31,7 +31,7 @@ router.patch(
   "/:id",
   upload.fields([
     { name: "image", maxCount: 1 },
-    { name: "gallery", maxCount: 3 },
+    { name: "gallary", maxCount: 3 },
   ]),
   updatePlayerInfo
 );
