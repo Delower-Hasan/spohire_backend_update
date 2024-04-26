@@ -38,6 +38,31 @@ const announcementSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    paymentMathod: {
+      type: String,
+      required: false,
+      default: "Card",
+    },
+    isPaid: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    subscriptionDate: {
+      type: String,
+      required: false,
+    },
+    expirationDate: {
+      type: String,
+      required: false,
+      default: false,
+    },
+    packagechoose: {
+      //label
+      type: Number,
+      required: false,
+    },
+
     // status: {
     //   type: String,
     //   enum: ["In Progress", "Published", "Denied"],

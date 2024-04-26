@@ -6,14 +6,15 @@ const {
   getBlogById,
   getAllBlogs,
 } = require("./blog.controller");
+const { isAdmin } = require("../../utils/middleware");
 
 const router = express.Router();
 
 // create new blog
-router.post("/", createBlog);
+router.post("/", isAdmin, createBlog);
 
 // update blog by blog id
-router.patch("/:id", updateBlog);
+router.patch("/:id", isAdmin, updateBlog);
 
 // get all blogs
 router.get("/all", getAllBlogs);
@@ -22,6 +23,6 @@ router.get("/all", getAllBlogs);
 router.get("/:id", getBlogById);
 
 // get all blogs
-router.delete("/:id", deleteBlog);
+router.delete("/:id", isAdmin, deleteBlog);
 
 module.exports = router;

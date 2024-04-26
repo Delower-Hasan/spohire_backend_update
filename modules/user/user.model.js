@@ -8,11 +8,6 @@ const userSchema = new mongoose.Schema(
       enum: userRoleEnum,
       required: true,
     },
-    referral: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: false,
-    },
     image: {
       type: String,
       required: false,
@@ -30,6 +25,35 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    about_me: {
+      type: String,
+      required: false,
+    },
+    gallary: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    experience: {
+      type: [Object],
+      start_year: {
+        type: Number,
+        required: true,
+      },
+      end_year: {
+        type: Number,
+        required: true,
+      },
+      social_media: {
+        type: [String],
+        required: false,
+      },
+      club_name: {
+        type: String,
+        required: true,
+      },
+      required: false,
     },
     password: {
       type: String,
@@ -51,72 +75,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    additional_passport: {
-      type: String,
-      required: false,
-    },
-    position: {
-      type: String,
-      enum: ["Left", "Right", "Ambidextrous"],
-      required: false,
-    },
-    height: {
-      type: Number,
-      required: false,
-    },
-    weight: {
-      type: Number,
-      required: false,
-    },
-    dominant_hand: {
-      type: String,
-      required: false,
-    },
-    social_media: {
-      type: [String],
-      required: false,
-    },
-    belong_to_the_club: {
-      type: String,
-      enum: ["Yes", "No"],
-      required: false,
-    },
-    club_name: {
-      type: String,
-      required: false,
-    },
-    club_position: {
-      type: String,
-      required: false,
-    },
-    experience: {
-      type: [Object],
-      start_year: {
-        type: Number,
-        required: true,
-      },
-      end_year: {
-        type: Number,
-        required: true,
-      },
-      club_name: {
-        type: String,
-        required: true,
-      },
-      required: false,
-    },
-    strengths_advantage: {
-      type: String,
-      required: false,
-    },
-    about_me: {
-      type: String,
-      required: false,
-    },
-    expectations_from_new_club: {
-      type: String,
-      required: false,
-    },
+
     date_of_birth: {
       type: String,
       required: false,
@@ -125,11 +84,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: userSportsEnum,
       required: true,
-    },
-    gallary: {
-      type: Array,
-      required: false,
-      default: [],
     },
     isSubsCribed: {
       type: Boolean,
@@ -146,20 +100,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    isCreatedProfile: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    addedProfile: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
     expirationDate: {
       type: String,
       required: false,
       default: false,
+    },
+    packageChoosed: {
+      type: Number,
+      required: false,
+    },
+    isRenewable: {
+      type: Boolean,
+      required: false,
     },
     isActive: {
       type: Boolean,

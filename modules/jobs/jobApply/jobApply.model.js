@@ -6,15 +6,7 @@ const jobApplySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    birth_date: {
-      type: Date,
-      required: true,
-    },
-    region: {
-      type: String,
-      required: true,
-    },
-    expected_salary: {
+    lname: {
       type: String,
       required: true,
     },
@@ -36,14 +28,12 @@ const jobApplySchema = new mongoose.Schema(
       ref: "Job",
       required: true,
     },
-    creator: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    job_description: {
+      type: String,
       required: true,
     },
-    contentType: { type: String, required: true },
     userInfo: {
-      type: mongoose.Schema.Types.ObjectId, // job id
+      type: mongoose.Schema.Types.ObjectId, // users
       ref: "User",
       required: true,
     },

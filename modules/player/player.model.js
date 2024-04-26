@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 const { userRoleEnum, userSportsEnum } = require("../user/user.constant");
 
+// schema for adding player/coach to the marketplace
 const playerSchema = new mongoose.Schema(
   {
+    firstName: String,
+    lastName: String,
     role: {
       type: String,
       enum: userRoleEnum,
@@ -11,7 +14,7 @@ const playerSchema = new mongoose.Schema(
     referral: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
     },
     image: {
       type: String,
@@ -20,15 +23,24 @@ const playerSchema = new mongoose.Schema(
     },
     fullName: {
       type: String,
+      required: false,
+    },
+    gender: String,
+    phone_number: String,
+    country: String,
+    city: String,
+    nationality: {
+      type: String,
       required: true,
     },
-    nationality: {
+    email: {
       type: String,
       required: true,
     },
     additional_passport: {
       type: String,
       required: false,
+      default: "N/A",
     },
     mainPosition: {
       type: String,
@@ -56,7 +68,7 @@ const playerSchema = new mongoose.Schema(
     },
     belong_to_the_club: {
       type: String,
-      enum: ["Yes", "No"],
+      enum: ["yes", "no"],
       required: false,
     },
     club_name: {
@@ -102,7 +114,7 @@ const playerSchema = new mongoose.Schema(
     sports: {
       type: String,
       enum: userSportsEnum,
-      required: true,
+      required: false,
     },
     gallary: {
       type: Array,
@@ -138,6 +150,16 @@ const playerSchema = new mongoose.Schema(
       type: Boolean,
       required: false,
       default: true,
+    },
+    packageChoosed: {
+      //1 months, 2 months, 3 months
+      type: Number,
+      required: true,
+    },
+    isRenewable: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
   },
   {

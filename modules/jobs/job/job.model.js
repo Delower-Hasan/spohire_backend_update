@@ -7,6 +7,7 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     club_logo: {
+      //company logo
       type: String,
       required: true,
     },
@@ -27,18 +28,17 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    role: {
+    category: {
       type: String,
-      // enum: ["Coach", "Player"],
       required: true,
     },
+    paymentMethod: String,
     jobType: {
       type: String,
       enum: ["Full-time", "Part-time", "Contract", "Temporary"],
       required: true,
     },
     language: { type: String, required: true },
-
     salary: {
       type: Number,
       required: true,
@@ -61,6 +61,16 @@ const jobSchema = new mongoose.Schema(
       type: Boolean,
       required: false,
       default: true,
+    },
+    packagechoose: {
+      //label
+      type: Number,
+      required: false,
+    },
+    tags: {
+      //label
+      type: String,
+      required: false,
     },
 
     creator: {

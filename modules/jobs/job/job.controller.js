@@ -9,7 +9,6 @@ const createJob = async (req, res) => {
   try {
     if (req.file) {
       req.body["club_logo"] = req.file.path;
-      // console.log("req.file.path:", req.file.path)
     }
     const newNewJob = new Job(req.body);
     const result = await newNewJob.save();

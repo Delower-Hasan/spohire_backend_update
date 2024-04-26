@@ -17,16 +17,18 @@ router.post(
   handleMulterError,
   createJob
 );
+
 router.get("/", getJobs);
 
-router.get("/:id", getJobById);
+router.get("/:id", isAuth, getJobById);
 router.get("/getMyJobOffers", isAuth, getMyJobOffers);
 router.patch(
   "/:id",
   upload.single("club_logo"),
+  isAuth,
   handleMulterError,
   UpdateJobById
 );
-router.delete("/:id", DeleteJobById);
+router.delete("/:id", isAuth, DeleteJobById);
 
 module.exports = router;
