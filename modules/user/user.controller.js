@@ -335,8 +335,8 @@ const updateUserInfo = async (req, res) => {
       req.body["image"] = req.files?.image[0]?.path;
     }
 
-    if (req.files?.gallery) {
-      const galleryPath = req.files?.gallery?.map((i) => i.path);
+    if (req.files?.gallary) {
+      const galleryPath = req.files?.gallary?.map((i) => i.path);
       if (galleryPath?.length > 0) {
         req.body["gallary"] = [...isExist.gallary, ...galleryPath];
       }

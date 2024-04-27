@@ -115,7 +115,7 @@ const playerSchema = new mongoose.Schema(
     sports: {
       type: String,
       enum: userSportsEnum,
-      required: false,
+      required: true,
     },
     gallary: {
       type: Array,

@@ -62,6 +62,11 @@ const announcementSchema = new mongoose.Schema(
       type: Number,
       required: false,
     },
+    isActive: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
 
     // status: {
     //   type: String,
