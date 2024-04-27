@@ -15,6 +15,7 @@ const observationRoutes = require("./modules/observation/observation.routes");
 const paymentRoutes = require("./modules/payment/payment.routes");
 const notificationRoutes = require("./modules/notification/notification.routes");
 const blogRoutes = require("./modules/blog/blog.routes");
+const contactRoutes = require("./modules/contact/contact.routes");
 
 // conversations
 const chatRoutes = require("./modules/conversations/chat/chat.routes");
@@ -52,6 +53,7 @@ app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
 app.use("/api/v1/chats", chatRoutes);
 app.use("/api/v1/messages", messageRoutes);
 app.use("/api/v1/blogs", blogRoutes);
+app.use("/api/v1/contact", contactRoutes);
 
 // Schedule task to run daily at midnight
 cron.schedule("0 0 * * *", async () => {
