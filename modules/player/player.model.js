@@ -21,6 +21,7 @@ const playerSchema = new mongoose.Schema(
       required: false,
       default: undefined,
     },
+    age: Number,
     fullName: {
       type: String,
       required: false,
