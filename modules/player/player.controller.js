@@ -11,7 +11,7 @@ const createPlayer = async (req, res) => {
         req.body["image"] = req.files?.image[0]?.path;
       }
 
-      console.log("req.files?.gallary", req.files?.gallary);
+   
 
       if (req.files?.gallary) {
         const galleryPath = req.files?.gallary?.map((i) => i.path);
