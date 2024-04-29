@@ -13,16 +13,16 @@ const { upload } = require("../../config/multerConfig");
 const router = express.Router();
 
 // create new blog
-router.post("/",upload.fields([
+router.post("/", upload.fields([
   { name: "image", maxCount: 1 },
   { name: "cover_image", maxCount:1 },
-]), isAdmin, createBlog);
+]), createBlog);
 
 // update blog by blog id
 router.patch("/:id",upload.fields([
   { name: "image", maxCount: 1 },
   { name: "cover_image", maxCount:1 },
-]), isAdmin, updateBlog);
+]), updateBlog);
 
 // get all blogs
 router.get("/all", getAllBlogs);
@@ -31,6 +31,6 @@ router.get("/all", getAllBlogs);
 router.get("/:id", getBlogById);
 
 // get all blogs
-router.delete("/:id", isAdmin, deleteBlog);
+router.delete("/:id", deleteBlog);
 
 module.exports = router;
