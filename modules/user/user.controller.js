@@ -435,7 +435,11 @@ const updateUSerCreatedProfile = async (req, res) => {
 const getFilteredUsers = async (req, res) => {
   try {
     const { ...rest } = req.query;
-    const result = await Player.find({ ...rest, isSubsCribed: true }).sort({
+    const result = await Player.find({
+      ...rest,
+      isSubsCribed: true,
+      isActive: true,
+    }).sort({
       _id: -1,
     });
 
