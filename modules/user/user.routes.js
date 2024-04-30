@@ -41,7 +41,7 @@ router.patch(
   "/:id",
   upload.fields([
     { name: "image", maxCount: 1 },
-    { name: "gallery", maxCount: 3 },
+    { name: "gallary", maxCount: 3 },
   ]),
   updateUserInfo
 );

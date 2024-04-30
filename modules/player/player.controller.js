@@ -10,9 +10,6 @@ const createPlayer = async (req, res) => {
       if (req.files?.image) {
         req.body["image"] = req.files?.image[0]?.path;
       }
-
-   
-
       if (req.files?.gallary) {
         const galleryPath = req.files?.gallary?.map((i) => i.path);
         req.body["gallary"] = galleryPath;
@@ -79,13 +76,13 @@ const getPlayers = async (req, res) => {
     const result = await Player.find({}).sort({ _id: -1 });
     res.status(200).json({
       success: true,
-      message: "Players Retrieve Success",
+      message: "Players and Coaches Retrieve Success",
       data: result,
     });
   } catch (error) {
     res.status(201).json({
       success: false,
-      message: "Players Retrieve Failed",
+      message: "Players and Coaches Retrieve Failed",
       error_message: error.message,
     });
   }
