@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const blogSchema = new mongoose.Schema(
   {
+    type: {
+      type: String
+    },
     title: {
       type: String,
       required: true,
@@ -13,7 +16,7 @@ const blogSchema = new mongoose.Schema(
     cover_image: {
       type: String,
     },
-    short_description: {
+    short_description: {  
       type: String,
       required: true,
     },
