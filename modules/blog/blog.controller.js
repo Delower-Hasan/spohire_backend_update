@@ -2,6 +2,14 @@ const Blog = require("./blog.model");
 
 const createBlog = async (req, res) => {
   try {
+
+    if (req.files?.image) {
+      req.body["image"] = req.files?.image[0]?.path;
+    }
+    if (req.files?.image) {
+      req.body["cover_image"] = req.files?.cover_image[0]?.path;
+    }
+
     const newBlog = new Blog(req.body);
     const result = await newBlog.save();
     res.status(200).json({
@@ -79,6 +87,13 @@ const getBlogById = async (req, res) => {
 // update blog by blog id
 const updateBlog = async (req, res) => {
   try {
+    if (req.files?.image) {
+      req.body["image"] = req.files?.image[0]?.path;
+    }
+    if (req.files?.image) {
+      req.body["cover_image"] = req.files?.cover_image[0]?.path;
+    }
+    
     const result = await Blog.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,
