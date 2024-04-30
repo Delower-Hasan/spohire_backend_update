@@ -21,6 +21,7 @@ const playerSchema = new mongoose.Schema(
       required: false,
       default: undefined,
     },
+    age: Number,
     fullName: {
       type: String,
       required: false,
@@ -114,7 +115,7 @@ const playerSchema = new mongoose.Schema(
     sports: {
       type: String,
       enum: userSportsEnum,
-      required: false,
+      required: true,
     },
     gallary: {
       type: Array,

@@ -28,6 +28,7 @@ const socketIo = require("socket.io");
 const Job = require("./modules/jobs/job/job.model");
 const Player = require("./modules/player/player.model");
 const User = require("./modules/user/user.model");
+const AnnouncementModel = require("./modules/announcement/announcement.model");
 
 // middleware
 app.use(cors());
@@ -68,6 +69,10 @@ cron.schedule("0 0 * * *", async () => {
     { isActive: false }
   );
   await User.updateMany(
+    { expirationDate: { $lt: currentDate } },
+    { isActive: false }
+  );
+  await AnnouncementModel.updateMany(
     { expirationDate: { $lt: currentDate } },
     { isActive: false }
   );
