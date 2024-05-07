@@ -12,8 +12,11 @@ const createPlayer = async (req, res) => {
       }
       if (req.files?.gallary) {
         const galleryPath = req.files?.gallary?.map((i) => i.path);
-        req.body["gallary"] = galleryPath;
+        if (galleryPath?.length > 0) {
+          req.body["gallary"] = galleryPath;
+        }
       }
+  
       const newNewPlayer = new Player(req.body);
       const result = await newNewPlayer.save();
 

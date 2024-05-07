@@ -48,6 +48,7 @@ app.use("/api/v1/job-applies", jobApplyRoutes);
 app.use("/api/v1/observations", observationRoutes);
 app.use("/api/v1/payments", paymentRoutes);
 app.use("/api/v1/notification", notificationRoutes);
+
 // static paths
 app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
 app.use(express.static(path.join(__dirname, "dist")));
@@ -76,7 +77,7 @@ cron.schedule("0 0 * * *", async () => {
   );
   await AnnouncementModel.updateMany(
     { expirationDate: { $lt: currentDate } },
-    { isActive: false, isPaid: false }
+    { isActive: false, isPaid: false, status: "Not Published" }
   );
 });
 
