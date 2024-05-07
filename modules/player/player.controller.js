@@ -105,13 +105,10 @@ const getPlayerById = async (req, res) => {
 
 const UpdatePlayerById = async (req, res) => {
   try {
-    if (req.files) {
-      let files = [];
-      if (req.files?.gallery) {
-        for (let i = 0; i < req.files?.gallery.length; i++) {
-          files.push(req.files?.gallery[i].path);
-        }
-        req.body["gallery"] = files;
+    if (req.files?.gallary) {
+      const galleryPath = req.files?.gallary?.map((i) => i.path);
+      if (galleryPath?.length > 0) {
+        req.body["gallary"] = [...isExist.gallary, ...galleryPath];
       }
     }
     const result = await Player.findByIdAndUpdate(
@@ -159,8 +156,9 @@ const updatePlayerInfo = async (req, res) => {
       req.body["image"] = req.files?.image[0]?.path;
     }
 
-    if (req.files?.gallery) {
-      const galleryPath = req.files?.gallery?.map((i) => i.path);
+    if (req.files?.gallary) {
+      const galleryPath = req.files?.gallary?.map((i) => i.path);
+      console.log("galleryPath", [...isExist.gallary, ...galleryPath]);
       if (galleryPath?.length > 0) {
         req.body["gallary"] = [...isExist.gallary, ...galleryPath];
       }

@@ -49,11 +49,11 @@ const announcementSchema = new mongoose.Schema(
       default: true,
     },
     subscriptionDate: {
-      type: String,
+      type: Date,
       required: false,
     },
     expirationDate: {
-      type: String,
+      type: Date,
       required: false,
       default: false,
     },

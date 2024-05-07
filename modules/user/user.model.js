@@ -97,11 +97,11 @@ const userSchema = new mongoose.Schema(
       default: undefined,
     },
     subscriptionDate: {
-      type: String,
+      type: Date,
       required: false,
     },
     expirationDate: {
-      type: String,
+      type: Date,
       required: false,
       default: false,
     },

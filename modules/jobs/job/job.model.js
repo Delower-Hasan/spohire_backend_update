@@ -47,13 +47,12 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     subscriptionDate: {
-      type: String,
+      type: Date,
       required: false,
     },
     expirationDate: {
-      type: String,
+      type: Date,
       required: false,
       default: false,
     },

@@ -12,8 +12,6 @@ const createAnnouncement = async (req, res) => {
     }
     const newAnnouncement = new Announcement(req.body);
     const result = await newAnnouncement.save();
-    // const data = await getNewNotificationsEmails();
-    // await sendNotificationMail(data);
     res.status(200).json({
       success: true,
       message: "Announcement Create Success",

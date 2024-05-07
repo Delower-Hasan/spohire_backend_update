@@ -134,7 +134,7 @@ const playerSchema = new mongoose.Schema(
       default: undefined,
     },
     subscriptionDate: {
-      type: String,
+      type: Date,
       required: false,
     },
     isCreatedProfile: {
@@ -143,7 +143,7 @@ const playerSchema = new mongoose.Schema(
       default: false,
     },
     expirationDate: {
-      type: String,
+      type: Date,
       required: false,
       default: false,
     },
