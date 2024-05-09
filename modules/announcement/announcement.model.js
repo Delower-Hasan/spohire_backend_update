@@ -49,11 +49,11 @@ const announcementSchema = new mongoose.Schema(
       default: true,
     },
     subscriptionDate: {
-      type: String,
+      type: Date,
       required: false,
     },
     expirationDate: {
-      type: String,
+      type: Date,
       required: false,
       default: false,
     },
@@ -67,12 +67,11 @@ const announcementSchema = new mongoose.Schema(
       required: false,
       default: true,
     },
-
-    // status: {
-    //   type: String,
-    //   enum: ["In Progress", "Published", "Denied"],
-    //   required: true,
-    // },
+    status: {
+      type: String,
+      enum: ["In Progress", "Published", "Denied","Not Published"],
+      default: "Published",
+    },
   },
   {
     timestamps: true,

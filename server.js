@@ -48,7 +48,10 @@ app.use("/api/v1/job-applies", jobApplyRoutes);
 app.use("/api/v1/observations", observationRoutes);
 app.use("/api/v1/payments", paymentRoutes);
 app.use("/api/v1/notification", notificationRoutes);
+
+// static paths
 app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
+app.use(express.static(path.join(__dirname, "dist")));
 
 // conversations
 app.use("/api/v1/chats", chatRoutes);
@@ -66,22 +69,20 @@ cron.schedule("0 0 * * *", async () => {
   );
   await Player.updateMany(
     { expirationDate: { $lt: currentDate } },
-    { isActive: false }
+    { isActive: false, subscriptionName: undefined, isSubsCribed: false }
   );
   await User.updateMany(
     { expirationDate: { $lt: currentDate } },
-    { isActive: false }
+    { isActive: false, subscriptionName: undefined, isSubsCribed: false }
   );
   await AnnouncementModel.updateMany(
     { expirationDate: { $lt: currentDate } },
-    { isActive: false }
+    { isActive: false, isPaid: false, status: "Not Published" }
   );
 });
 
 // static file serving
 // app.use("/api/v1/uploads", express.static(path.join(__dirname, "/")));
-
-//
 
 // -----------------socket server-----------------
 // const io = socketIo(Server, {
@@ -133,8 +134,12 @@ cron.schedule("0 0 * * *", async () => {
 // -----------------socket server-----------------
 
 // testing api
-app.get("/", (req, res) => {
+app.get("/api/v1/*", async (req, res) => {
   res.send("Server is running");
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 Server.listen(PORT, () => {
