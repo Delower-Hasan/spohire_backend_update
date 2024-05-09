@@ -29,7 +29,7 @@ const Job = require("./modules/jobs/job/job.model");
 const Player = require("./modules/player/player.model");
 const User = require("./modules/user/user.model");
 const AnnouncementModel = require("./modules/announcement/announcement.model");
-
+const CouponModal = require("./modules/coupon/coupon.routes");
 // middleware
 app.use(cors());
 app.use(express.json({ limit: "500mb" }));
@@ -58,6 +58,7 @@ app.use("/api/v1/chats", chatRoutes);
 app.use("/api/v1/messages", messageRoutes);
 app.use("/api/v1/blogs", blogRoutes);
 app.use("/api/v1/contact", contactRoutes);
+app.use("/api/v1/coupons", CouponModal);
 
 // Schedule task to run daily at midnight
 cron.schedule("0 0 * * *", async () => {

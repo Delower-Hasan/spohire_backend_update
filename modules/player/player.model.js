@@ -110,7 +110,7 @@ const playerSchema = new mongoose.Schema(
     },
     date_of_birth: {
       type: String,
-      required: false,
+      required: true,
     },
     sports: {
       type: String,
