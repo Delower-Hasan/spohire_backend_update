@@ -16,19 +16,19 @@ const createPlayer = async (req, res) => {
           req.body["gallary"] = galleryPath;
         }
       }
-  
+
       const newNewPlayer = new Player(req.body);
       const result = await newNewPlayer.save();
 
       res.status(200).json({
         success: true,
-        message: "Player Create Success",
+        message: `${req.body.role} Create Success`,
         data: result,
       });
     } else {
       res.status(400).json({
         success: false,
-        message: "Player already Added",
+        message: `${req.body.email} Already Used `,
       });
     }
   } catch (error) {
@@ -161,14 +161,10 @@ const updatePlayerInfo = async (req, res) => {
 
     if (req.files?.gallary) {
       const galleryPath = req.files?.gallary?.map((i) => i.path);
-      console.log("galleryPath", [...isExist.gallary, ...galleryPath]);
       if (galleryPath?.length > 0) {
         req.body["gallary"] = [...isExist.gallary, ...galleryPath];
       }
     }
-
-    // console.log(req.files, "req.files");
-    // console.log(req.files?.image[0]);
 
     if (isExist) {
       const result = await Player.findByIdAndUpdate(

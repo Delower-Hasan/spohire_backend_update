@@ -83,11 +83,11 @@ const playerSchema = new mongoose.Schema(
     experience: {
       type: [Object],
       start_year: {
-        type: Number,
+        type: String,
         required: true,
       },
       end_year: {
-        type: Number,
+        type: String,
         required: true,
       },
       club_name: {
