@@ -38,20 +38,3 @@ jobs:
             docker system prune -af
             docker-compose pull
             docker-compose up -d
-
-        # script: |
-        #   echo "Logged in to the server"
-        #   # Add your commands here
-
-      # - name: Deploy to EC2 with SSH
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.AWS_HOST }}
-      #     username: ${{ secrets.AWS_USERNAME }}
-      #     key: ${{ secrets.AWS_SSH_KEY }}
-      #     script: |
-      #       cd /home/ubuntu/app
-      #       docker-compose down
-      #       docker system prune -af
-      #       docker-compose pull
-      #       docker-compose up -d
