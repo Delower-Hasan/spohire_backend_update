@@ -32,7 +32,13 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          script: whoami
+          script: |
+            cd /home/ubuntu/server
+            docker-compose down
+            docker system prune -af
+            docker-compose pull
+            docker-compose up -d
+
         # script: |
         #   echo "Logged in to the server"
         #   # Add your commands here
