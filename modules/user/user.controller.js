@@ -328,9 +328,10 @@ const checkIsExistEmail = async (req, res) => {
 };
 
 const updateUserInfo = async (req, res) => {
+  console.log("req", req.body.social_media)
   try {
     const isExist = await User.findOne({ _id: req.params.id });
-
+    console.log("isExist:", isExist)
     if (req.files?.image) {
       req.body["image"] = req.files?.image[0]?.path;
     }
@@ -340,7 +341,9 @@ const updateUserInfo = async (req, res) => {
       if (galleryPath?.length > 0) {
         req.body["gallary"] = [...isExist.gallary, ...galleryPath];
       }
-    }
+    } 
+
+    console.log("req", req)
 
     if (isExist) {
       const result = await User.findByIdAndUpdate(
