@@ -103,7 +103,6 @@ const userSchema = new mongoose.Schema(
     expirationDate: {
       type: Date,
       required: false,
-      default: false,
     },
     packageChoosed: {
       type: Number,

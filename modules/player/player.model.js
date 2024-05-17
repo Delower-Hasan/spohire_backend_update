@@ -145,7 +145,6 @@ const playerSchema = new mongoose.Schema(
     expirationDate: {
       type: Date,
       required: false,
-      default: false,
     },
     isActive: {
       type: Boolean,

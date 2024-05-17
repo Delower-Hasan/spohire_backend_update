@@ -55,7 +55,6 @@ const announcementSchema = new mongoose.Schema(
     expirationDate: {
       type: Date,
       required: false,
-      default: false,
     },
     packagechoose: {
       //label
@@ -69,7 +68,7 @@ const announcementSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["In Progress", "Published", "Denied","Not Published"],
+      enum: ["In Progress", "Published", "Denied", "Not Published"],
       default: "Published",
     },
   },
