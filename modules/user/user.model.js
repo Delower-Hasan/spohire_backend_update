@@ -45,14 +45,14 @@ const userSchema = new mongoose.Schema(
         type: Number,
         required: true,
       },
-      social_media: {
-        type: [String],
-        required: false,
-      },
       club_name: {
         type: String,
         required: true,
       },
+      required: false,
+    },
+    social_media: {
+      type: [String],
       required: false,
     },
     password: {
