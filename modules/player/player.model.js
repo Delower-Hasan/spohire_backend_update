@@ -1,6 +1,24 @@
 const mongoose = require("mongoose");
 const { userRoleEnum, userSportsEnum } = require("../user/user.constant");
 
+const experienceSchema = new mongoose.Schema(
+  {
+    start_year: {
+      type: String,
+      required: true,
+    },
+    end_year: {
+      type: String,
+      required: true,
+    },
+    club_name: {
+      type: String,
+      required: true,
+    },
+  },
+  { _id: false }
+);
+
 // schema for adding player/coach to the marketplace
 const playerSchema = new mongoose.Schema(
   {
@@ -80,20 +98,24 @@ const playerSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    // experience: {
+    //   type: [Object],
+    //   start_year: {
+    //     type: String,
+    //     required: true,
+    //   },
+    //   end_year: {
+    //     type: String,
+    //     required: true,
+    //   },
+    //   club_name: {
+    //     type: String,
+    //     required: true,
+    //   },
+    //   required: false,
+    // },
     experience: {
-      type: [Object],
-      start_year: {
-        type: String,
-        required: true,
-      },
-      end_year: {
-        type: String,
-        required: true,
-      },
-      club_name: {
-        type: String,
-        required: true,
-      },
+      type: [experienceSchema],
       required: false,
     },
     strengths_advantage: {

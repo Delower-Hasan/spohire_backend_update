@@ -328,19 +328,19 @@ const checkIsExistEmail = async (req, res) => {
 };
 
 const updateUserInfo = async (req, res) => {
+  // =================================
   try {
     const isExist = await User.findOne({ _id: req.params.id });
-
     if (req.files?.image) {
       req.body["image"] = req.files?.image[0]?.path;
     }
-
     if (req.files?.gallary) {
       const galleryPath = req.files?.gallary?.map((i) => i.path);
       if (galleryPath?.length > 0) {
         req.body["gallary"] = [...isExist.gallary, ...galleryPath];
       }
     }
+    req.body["experience"] = JSON.parse(req.body.experiencenew);
 
     if (isExist) {
       const result = await User.findByIdAndUpdate(
@@ -362,7 +362,8 @@ const updateUserInfo = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(201).json({
+    console.error(error);
+    res.status(500).json({
       status: false,
       message: error.message,
     });

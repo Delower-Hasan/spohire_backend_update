@@ -1,6 +1,24 @@
 const mongoose = require("mongoose");
 const { userRoleEnum, userSportsEnum } = require("./user.constant");
 
+const experienceSchema = new mongoose.Schema(
+  {
+    start_year: {
+      type: String,
+      required: true,
+    },
+    end_year: {
+      type: String,
+      required: true,
+    },
+    club_name: {
+      type: String,
+      required: true,
+    },
+  },
+  { _id: false }
+); // _id: false to prevent creation of an _id field for each sub-document
+
 const userSchema = new mongoose.Schema(
   {
     role: {
@@ -36,19 +54,7 @@ const userSchema = new mongoose.Schema(
       default: [],
     },
     experience: {
-      type: [Object],
-      start_year: {
-        type: Number,
-        required: true,
-      },
-      end_year: {
-        type: Number,
-        required: true,
-      },
-      club_name: {
-        type: String,
-        required: true,
-      },
+      type: [experienceSchema],
       required: false,
     },
     social_media: {

@@ -24,6 +24,7 @@ const messageRoutes = require("./modules/conversations/message/message.routes");
 const app = express();
 const http = require("http");
 const Server = http.createServer(app);
+
 const socketIo = require("socket.io");
 const Job = require("./modules/jobs/job/job.model");
 const Player = require("./modules/player/player.model");
@@ -32,10 +33,8 @@ const AnnouncementModel = require("./modules/announcement/announcement.model");
 const CouponModal = require("./modules/coupon/coupon.routes");
 // middleware
 app.use(cors());
-app.use(express.json({ limit: "500mb" }));
-app.use(
-  express.urlencoded({ limit: "500mb", extended: true, parameterLimit: 500000 })
-);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 connectDB();
 
