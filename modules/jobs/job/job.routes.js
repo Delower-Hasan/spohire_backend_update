@@ -20,7 +20,7 @@ router.post(
 
 router.get("/", getJobs);
 
-router.get("/:id", isAuth, getJobById);
+router.get("/:id", getJobById);
 router.get("/getMyJobOffers", isAuth, getMyJobOffers);
 router.patch(
   "/:id",
