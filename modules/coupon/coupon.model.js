@@ -17,7 +17,7 @@ const couponSchema = new mongoose.Schema(
     },
     couponFor: {
       type: String,
-      enum: ["Player", "Coach"],
+      enum: ["Player", "Coach", "Job", "Announcement", "Subscription"],
       required: true,
     },
   },

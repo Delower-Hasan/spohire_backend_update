@@ -51,21 +51,20 @@ const updateCoupon = async (req, res) => {
     const coupon = await Coupon.findById(req.params.id);
     let existingCoupon = await Coupon.findOne({
       code: info.code.trim(),
+      _id: { $ne: req.params.id },
     });
+
     if (existingCoupon) {
       return res.status(200).send({
         message: "This coupon is already used",
         success: false,
       });
     }
+
     if (coupon) {
-      const result = await Coupon.findByIdAndUpdate(
-        { _id: req.params.id },
-        info,
-        {
-          new: true,
-        }
-      );
+      await Coupon.findByIdAndUpdate({ _id: req.params.id }, info, {
+        new: true,
+      });
       res.status(200).send({
         message: "Coupon updated successfully",
         status: 200,
