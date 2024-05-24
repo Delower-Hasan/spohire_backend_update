@@ -47,6 +47,10 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    short_description: {
+      type: String,
+      required: true,
+    },
     subscriptionDate: {
       type: Date,
       required: false,

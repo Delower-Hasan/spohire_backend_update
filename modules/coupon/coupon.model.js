@@ -18,7 +18,7 @@ const couponSchema = new mongoose.Schema(
     couponFor: {
       type: String,
       enum: ["Player", "Coach", "Job", "Announcement", "Subscription"],
-      required: true,
+      required: false,
     },
   },
   { timestamps: true }
