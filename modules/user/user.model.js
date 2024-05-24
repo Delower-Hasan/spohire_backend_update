@@ -77,6 +77,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    social_media: {
+      type: [String],
+      required: false,
+    },
     password: {
       type: String,
       required: true,
