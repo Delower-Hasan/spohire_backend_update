@@ -57,10 +57,6 @@ const userSchema = new mongoose.Schema(
       type: [experienceSchema],
       required: false,
     },
-    social_media: {
-      type: [String],
-      required: false,
-    },
     facebook: {
       type: String,
       required: false,
@@ -75,10 +71,6 @@ const userSchema = new mongoose.Schema(
     },
     twitter: {
       type: String,
-      required: false,
-    },
-    social_media: {
-      type: [String],
       required: false,
     },
     password: {
