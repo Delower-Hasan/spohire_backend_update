@@ -340,7 +340,10 @@ const updateUserInfo = async (req, res) => {
         req.body["gallary"] = [...isExist.gallary, ...galleryPath];
       }
     }
-    req.body["experience"] = JSON.parse(req.body.experiencenew);
+
+      if(req.body.experiencenew !==undefined){
+        req.body["experience"] = JSON.parse(req.body.experiencenew);
+      }
 
     if (isExist) {
       const result = await User.findByIdAndUpdate(
