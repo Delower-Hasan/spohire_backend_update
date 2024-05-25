@@ -17,6 +17,9 @@ const createPlayer = async (req, res) => {
         }
       }
 
+      if (req.body.experiencenew !== undefined) {
+        req.body["experience"] = JSON.parse(req.body.experiencenew);
+      }
       const newNewPlayer = new Player(req.body);
       const result = await newNewPlayer.save();
 
@@ -34,7 +37,7 @@ const createPlayer = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "Player Create Failed",
+      message: error.message,
       error_message: error.message,
     });
   }
@@ -165,7 +168,10 @@ const updatePlayerInfo = async (req, res) => {
         req.body["gallary"] = [...isExist.gallary, ...galleryPath];
       }
     }
-    req.body["experience"] = JSON.parse(req.body.experiencenew);
+
+    if (req.body.experiencenew !== undefined) {
+      req.body["experience"] = JSON.parse(req.body.experiencenew);
+    }
 
     if (isExist) {
       const result = await Player.findByIdAndUpdate(
