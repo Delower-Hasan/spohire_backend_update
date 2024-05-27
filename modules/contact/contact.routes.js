@@ -1,11 +1,12 @@
 
 const express = require("express");
-const { createMessage } = require("./contact.controller");
+const { createMessage ,getContacts} = require("./contact.controller");
 
 
 const router = express.Router();
 
 router.post("/sendContactMessage", createMessage);
+router.get("/", getContacts);
 
 
 
