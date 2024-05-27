@@ -19,3 +19,12 @@ exports.createMessage = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 };
+exports.getContacts = async (req, res) => {
+    try {
+        const contatcts = await Contact.find({});
+        res.status(201).json({ data: contatcts,message: 'Message created successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};

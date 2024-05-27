@@ -29,7 +29,6 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
       required: false,
-      default: undefined,
     },
     first_name: {
       type: String,
@@ -112,7 +111,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: false,
       enum: ["Gold", "Silver", "Bronze", ""],
-      default: undefined,
     },
     subscriptionDate: {
       type: Date,
