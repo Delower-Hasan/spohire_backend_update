@@ -2,7 +2,6 @@ const Blog = require("./blog.model");
 
 const createBlog = async (req, res) => {
   try {
-
     if (req.files?.image) {
       req.body["image"] = req.files?.image[0]?.path;
     }
@@ -31,6 +30,7 @@ const getAllBlogs = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
+
     const sortOrder = req.query.sortOrder || "desc";
     const searchQuery = req.query.searchQuery || "";
     const startIndex = (page - 1) * limit;
@@ -93,7 +93,7 @@ const updateBlog = async (req, res) => {
     if (req.files?.image) {
       req.body["cover_image"] = req.files?.cover_image[0]?.path;
     }
-    
+
     const result = await Blog.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,

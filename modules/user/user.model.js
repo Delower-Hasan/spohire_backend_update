@@ -99,8 +99,8 @@ const userSchema = new mongoose.Schema(
     },
     sports: {
       type: String,
-      enum: userSportsEnum,
-      required: true,
+      // enum: userSportsEnum,
+      required: false,
     },
     isSubsCribed: {
       type: Boolean,
