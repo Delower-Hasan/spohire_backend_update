@@ -68,8 +68,6 @@ const upload = multer({
   },
 });
 
-
-
 // Middleware for handling Multer errors
 const handleMulterError = (err, req, res, next) => {
   if (err instanceof multer.MulterError) {
